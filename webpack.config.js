@@ -1,4 +1,5 @@
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   entry: {
     index: ['./src/index.ts'],
@@ -6,7 +7,7 @@ module.exports = {
     actions: ['./src/actions/index.ts']
   },
   output: {
-    path: path.join(__dirname, './'),
+    path: path.join(__dirname, './dist'),
     libraryTarget: 'umd',
     filename: "[name].js"
   },
@@ -19,5 +20,8 @@ module.exports = {
         // all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
       { test: /\.tsx?$/, loader: "awesome-typescript-loader" }
     ]
-  }
+  },
+  plugins: [
+    new CleanWebpackPlugin(['dist', 'types'])
+  ]
 };
